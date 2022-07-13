@@ -58,15 +58,99 @@ class Person extends Entity
     ];
     
     
+	/**
+     * Virtual field for displaying the complete name
+     *
+     * @return \Cake\ORM\Query
+     */
+    public function _getFullName() {
+    	
+    	$returnValue = "";
+    	if ($this->firstname != "" && !is_null($this->firstname)) {
+    		$returnValue .= $this->firstname." ";
+    	}
+    	if ($this->lastname != "" && !is_null($this->lastname)) {
+    		$returnValue .= $this->lastname;
+    	}
+    	return $returnValue;
+    	
+    }
+    
+    /**
+     * Virtual field for displaying the date (year) of birth
+     *
+     * @return \Cake\ORM\Query
+     */
+    public function _getBorn() {
+    	
+    	$returnValue = "";
+    	if ($this->yearofbirth != "0000" && !is_null($this->yearofbirth)) {
+    		$returnValue .= __("born ");
+    		$returnValue .= $this->yearofbirth;
+    		if ($this->yearofbirthUpper != "0000" && !is_null($this->yearofbirthUpper)) {
+    			$returnValue .= " or ".$this->yearofbirthUpper;
+    		}
+    	}
+    	
+    	return $returnValue;
+    	
+    }
+    
+    /**
+     * Virtual field for displaying the date (year) of death
+     *
+     * @return \Cake\ORM\Query
+     */
+    public function _getDied() {
+    	
+    	$returnValue = "";
+    	if ($this->yearofdeath != "0000" && !is_null($this->yearofdeath)) {
+    		$returnValue .= __("died ");
+    		$returnValue .= $this->yearofdeath;
+    		if ($this->yearofdeathUpper != "0000" && !is_null($this->yearofdeathUpper)) {
+    			$returnValue .= " or ".$this->yearofdeathUpper;
+    		}
+    	}
+    	
+    	return $returnValue;
+    	
+    }
+    
+    public function _getDateOfBirth() {
+    	
+    	return "1.1.1900";
+    	
+    }
+    
   
     /**
-     * Virtual Field for displaying the receiver (either a person or an institution)
+     * Virtual field for displaying the receiver (either a person or an institution)
      *
      * @return \Cake\ORM\Query
      */
     public function getLifeDates() {
     	
-    	return "test";
+    	$returnValue = "";
+    	if ($this->yearofbirth != "0000" && !is_null($this->yearofbirth)) {
+    		$returnValue .= $this->yearofbirth;
+    		if ($this->yearofbirthUpper != "0000" && !is_null($this->yearofbirthUpper)) {
+    			$returnValue .= "/".$this->yearofbirthUpper;
+    		}
+    		$returnValue .= "–";
+    	}
+    	if ($this->yearofdeath != "0000" && !is_null($this->yearofdeath)) {
+    		if ($this->yearofbirth == "0000"|| is_null($this->yearofbirth)) {
+    			$returnValue .= "–";
+    		}
+    		$returnValue .= $this->yearofdeath;
+    		if ($this->yearofdeathUpper != "0000" && !is_null($this->yearofdeathUpper)) {
+    			$returnValue .= "/".$this->yearofdeathUpper;
+    		}
+    	}
+    	if ($returnValue == "") {
+    		$returnValue = __("Unknown");
+    	}
+    	return $returnValue;
     	
     }
     

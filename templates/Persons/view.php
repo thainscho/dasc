@@ -4,6 +4,92 @@
  * @var \App\Model\Entity\Person $person
  */
 ?>
+
+<h3>
+<?php echo $person->fullName; ?><br />
+<small>
+	<?php echo ucfirst($person->born); ?>
+	<?php
+	$died = $person->died;
+	if ($died != "") {
+		echo ", ".$died;
+	}
+	?>
+</small>
+</h3>
+
+<dl class="row">
+	<dt class="col-sm-2"><?php echo __("First name"); ?></dt>
+	<dd class="col-sm-10">
+	<?php
+	if ($person->firstname != "" && !is_null($person->firstname)) {
+		echo '<p>';
+		echo $person->firstname;
+		echo '</p>';
+	} else {
+		echo '<p class="text-muted fst-italic">';
+		echo __("Unknown");
+		echo '</p>';
+	}
+	?>
+	</dd>
+	
+	<dt class="col-sm-2"><?php echo __("Last name"); ?></dt>
+	<dd class="col-sm-10">
+	<?php
+	if ($person->lastname != "" && !is_null($person->lastname)) {
+		echo '<p>';
+		echo $person->lastname;
+		echo '</p>';
+	} else {
+		echo '<p class="text-muted fst-italic">';
+		echo __("Unknown");
+		echo '</p>';
+	}
+	?>
+	</dd>
+	
+	<dt class="col-sm-2">DBpedia URL</dt>
+	<dd class="col-sm-10">
+	<?php
+	if ($person->dbpedia_url != "" && !is_null($person->dbpedia_url)) {
+		echo '<p>';
+		echo $person->dbpedia_url;
+		echo '</p>';
+	} else {
+		echo '<p class="text-muted fst-italic">';
+		echo __("Unknown");
+		echo '</p>';
+	}
+	?>
+	</dd>
+	
+	<dt class="col-sm-2">Gender</dt>
+	<dd class="col-sm-10">
+	<p>
+	<?php
+	echo $this->Dasc->getGender($person->gender);
+	?>
+	</p>
+	</dd>
+	
+	<dt class="col-sm-2"><?php echo __("Date of birth") ?></dt>
+	<dd class="col-sm-10">
+	<?php
+	if (is_null($person->dayofbirth) && is_null($person->monthofbirth) && (is_null($person->yearofbirth) || $person->yearofbirth == "0000")) {
+		echo '<p class="text-muted fst-italic">';
+		echo __("Unknown");
+		echo '</p>';
+	} else {
+		echo '<p>';
+		echo $person->dateOfBirth;
+		echo '</p>';
+	}
+	?>
+	</dd>
+</dl>
+
+
 <div class="row">
     <aside class="column">
         <div class="side-nav">

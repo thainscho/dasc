@@ -40,6 +40,7 @@ class AppView extends View
     	
     	parent::initialize();
     	$this->loadHelper('Flash');
+    	$this->loadHelper('Dasc');
 
     	
     }

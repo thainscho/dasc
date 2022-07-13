@@ -8,7 +8,6 @@
 
 <h3>
 <?php echo $letter->detailed_info; ?><br />
-<small>Detail view</small>
 </h3>
 
 
