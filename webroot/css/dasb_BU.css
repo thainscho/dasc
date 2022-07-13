@@ -1,0 +1,21 @@
+
+
+body {
+	background-color:#563d7c !important;	
+}
+label {
+	color:#ffffff !important;
+}
+
+.form-row {
+	margin-top:10px;	
+}
+
+.main { /* Main content container */
+	margin-top: 20px;
+}
+
+div h3, h4 { /* Headlines in main content container */
+  font-size: 1.3em !important;	
+  font-weight: bold !important;	
+}
