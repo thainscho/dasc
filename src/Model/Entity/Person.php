@@ -116,9 +116,68 @@ class Person extends Entity
     	
     }
     
+    /**
+     * Virtual field for displaying the date of birth
+     * 
+     * @return string|NULL
+     */
     public function _getDateOfBirth() {
     	
-    	return "1.1.1900";
+    	$returnValue = "";
+    	if ($this->dayofbirth != "" && !is_null($this->dayofbirth)) {
+    		$returnValue .= $this->dayofbirth;
+    	} else {
+    		$returnValue .= "?";
+    	}
+    	$returnValue .= ".";
+    	if ($this->monthofbirth != "" && !is_null($this->monthofbirth)) {
+    		$returnValue .= $this->monthofbirth;
+    	} else {
+    		$returnValue .= "?";
+    	}
+    	$returnValue .= ".";
+    	if ($this->yearofbirth != "0000" && !is_null($this->yearofbirth)) {
+    		$returnValue .= $this->yearofbirth;
+    	} else {
+    		$returnValue .= "?";
+    	}
+    	return $returnValue;
+    	
+    }
+    
+    /**
+     * Virtual field for displaying the date of death
+     *
+     * @return string|NULL
+     */
+    public function _getDateOfDeath() {
+    	
+    	$returnValue = "";
+    	if ($this->dayofdeath != "" && !is_null($this->dayofdeath) &&
+    		$this->monthofdeath != "" && !is_null($this->monthofdeath) &&
+    		$this->yearofdeath != "0000" && !is_null($this->yearofdeath)) {
+    			$returnValue = __("Unknown");
+    		}
+    			
+    	$returnValue = "";
+    	if ($this->dayofdeath != "" && !is_null($this->dayofdeath)) {
+    		$returnValue .= $this->dayofdeath;
+    	} else {
+    		$returnValue .= "?";
+    	}
+    	$returnValue .= ".";
+    	if ($this->monthofdeath != "" && !is_null($this->monthofdeath)) {
+    		$returnValue .= $this->monthofdeath;
+    	} else {
+    		$returnValue .= "?";
+    	}
+    	$returnValue .= ".";
+    	if ($this->yearofdeath != "0000" && !is_null($this->yearofdeath)) {
+    		$returnValue .= $this->yearofdeath;
+    	} else {
+    		$returnValue .= "?";
+    	}
+    	return $returnValue;
     	
     }
     

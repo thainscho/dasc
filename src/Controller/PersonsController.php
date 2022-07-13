@@ -38,10 +38,10 @@ class PersonsController extends AppController
 	 * @return \Cake\Http\Response|null|void Renders view
 	 * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
 	 */
-	public function view($id = null)
-	{
+	public function view($id = null) {
+		
 		$person = $this->Persons->get($id, [
-			'contain' => ['Receivers', 'Senders'],
+			'contain' => ['Receivers' => ['Letters' => ['Letterformats', 'Senders' => ['Persons', 'Institutions'], 'Receivers' => ['Persons', 'Institutions']]], 'Senders' => ['Letters' => ['Letterformats', 'Senders' => ['Persons', 'Institutions'], 'Receivers' => ['Persons', 'Institutions']]]],
 		]);
 		
 		$this->set(compact('person'));
@@ -53,8 +53,7 @@ class PersonsController extends AppController
 	 * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
 	 */
 	public function add() {
-		
-		
+
 		$person = $this->Persons->newEmptyEntity();
 		if ($this->request->is('post')) {
 			$person = $this->Persons->patchEntity($person, $this->request->getData());
