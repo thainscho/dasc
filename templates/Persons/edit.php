@@ -12,7 +12,7 @@
  */
 ?>
 
-<h3><?= __('Edit Person') ?><br />
+<h3><?= __('Edit person record') ?><br />
 <small><?php echo $person->fullName ?></small>
 </h3>
 

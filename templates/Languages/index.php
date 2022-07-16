@@ -4,14 +4,21 @@
  * @var \App\Model\Entity\Language[]|\Cake\Collection\CollectionInterface $languages
  */
 ?>
+<h3><?= __('Languages') ?></h3>
+    
+<p>Data records of languages are managed here.</p>
+    
+<p>
+<?= $this->Html->link('<i class="fa-solid fa-plus"></i> '.__('Create new language record'), ['action' => 'add'], ['escape' => false, 'class' => 'btn-primary btn btn-small']) ?>
+</p>
+    
+    
 <div class="languages index content">
-    <?= $this->Html->link(__('New Language'), ['action' => 'add'], ['class' => 'button float-right']) ?>
-    <h3><?= __('Languages') ?></h3>
     <div class="table-responsive">
-        <table>
+        <table class="table">
             <thead>
                 <tr>
-                    <th><?= $this->Paginator->sort('id') ?></th>
+                    <th><?= $this->Paginator->sort('id', 'ID') ?></th>
                     <th><?= $this->Paginator->sort('name') ?></th>
                     <th><?= $this->Paginator->sort('abbreviation') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
@@ -23,10 +30,22 @@
                     <td><?= $this->Number->format($language->id) ?></td>
                     <td><?= h($language->name) ?></td>
                     <td><?= h($language->abbreviation) ?></td>
-                    <td class="actions">
-                        <?= $this->Html->link(__('View'), ['action' => 'view', $language->id]) ?>
-                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $language->id]) ?>
-                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $language->id], ['confirm' => __('Are you sure you want to delete # {0}?', $language->id)]) ?>
+                    <td>
+                        <?= $this->Html->link(
+                        		'<i class="fa-solid fa-eye"></i> '.__('View'),
+                        		['action' => 'view', $language->id],
+                        		['escape' => false, 'class' => 'btn btn-primary btn-sm']);
+                        ?>
+                        <?= $this->Html->link(
+                        		'<i class="fa-solid fa-pen"></i> '.__('Edit'),
+                        		['action' => 'edit', $language->id],
+                        		['escape' => false, 'class' => 'btn btn-primary btn-sm']);
+                        ?>
+                        <?= $this->Form->postLink(
+                        		'<i class="fa-solid fa-trash"></i> '.__('Delete'),
+                        		['action' => 'delete', $language->id],
+                        		['escape' => false, 'class' => 'btn btn-danger btn-sm', 'confirm' => __('Are you sure you want to delete # {0}?', $language->id)]);
+                        ?>
                     </td>
                 </tr>
                 <?php endforeach; ?>

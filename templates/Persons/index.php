@@ -10,12 +10,12 @@
 <p>Data records of individual persons are managed here. A record of a person is required to specify them as sender or recipient of correspondence.</p>
     
 <p>
-<?= $this->Html->link('<i class="fa-solid fa-plus"></i> '.__('Create new person'), ['action' => 'add'], ['escape' => false, 'class' => 'btn-primary btn btn-small']) ?>
+<?= $this->Html->link('<i class="fa-solid fa-plus"></i> '.__('Create new person record'), ['action' => 'add'], ['escape' => false, 'class' => 'btn-primary btn btn-small']) ?>
 </p>
     
 <div class="persons index content">
     
- <div class="table-responsive">
+	<div class="table-responsive">
         <table class="table">
             <thead>
                 <tr>

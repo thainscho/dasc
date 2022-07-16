@@ -4,13 +4,16 @@
  * @var \App\Model\Entity\Letterformat $letterformat
  */
 ?>
+
+<h3><?= __('Formats of correspondence') ?><br />
+<small><?php echo __('Create a new record of a correspondence format'); ?></small>
+</h3>
+
+<p>
+<?= $this->Html->link(__('Back'), ['action' => 'index']) ?>
+</p>
+
 <div class="row">
-    <aside class="column">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('List Letterformats'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-        </div>
-    </aside>
     <div class="column-responsive column-80">
         <div class="letterformats form content">
             <?= $this->Form->create($letterformat) ?>

@@ -6,7 +6,7 @@
 ?>
 
 <h3><?= __('Persons') ?><br />
-<small><?php echo __('Create new person'); ?></small>
+<small><?php echo __('Create new person record'); ?></small>
 </h3>
 
 <p>

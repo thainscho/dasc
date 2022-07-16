@@ -4,14 +4,20 @@
  * @var \App\Model\Entity\Letterformat[]|\Cake\Collection\CollectionInterface $letterformats
  */
 ?>
+<h3><?= __('Formats of correspondence') ?></h3>
+    
+<p>Data records of formats in which correspondence is available.</p>
+    
+<p>
+<?= $this->Html->link('<i class="fa-solid fa-plus"></i> '.__('Create new format'), ['action' => 'add'], ['escape' => false, 'class' => 'btn-primary btn btn-small']) ?>
+</p>
+  
 <div class="letterformats index content">
-    <?= $this->Html->link(__('New Letterformat'), ['action' => 'add'], ['class' => 'button float-right']) ?>
-    <h3><?= __('Letterformats') ?></h3>
     <div class="table-responsive">
-        <table>
+        <table class="table">
             <thead>
                 <tr>
-                    <th><?= $this->Paginator->sort('id') ?></th>
+                    <th><?= $this->Paginator->sort('id', 'ID') ?></th>
                     <th><?= $this->Paginator->sort('name') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
                 </tr>
@@ -21,10 +27,22 @@
                 <tr>
                     <td><?= $this->Number->format($letterformat->id) ?></td>
                     <td><?= h($letterformat->name) ?></td>
-                    <td class="actions">
-                        <?= $this->Html->link(__('View'), ['action' => 'view', $letterformat->id]) ?>
-                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $letterformat->id]) ?>
-                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $letterformat->id], ['confirm' => __('Are you sure you want to delete # {0}?', $letterformat->id)]) ?>
+                    <td>
+                        <?= $this->Html->link(
+                        		'<i class="fa-solid fa-eye"></i> '.__('View'),
+                        		['action' => 'view', $letterformat->id],
+                        		['escape' => false, 'class' => 'btn btn-primary btn-sm']);
+                        ?>
+                        <?= $this->Html->link(
+                        		'<i class="fa-solid fa-pen"></i> '.__('Edit'),
+                        		['action' => 'edit', $letterformat->id],
+                        		['escape' => false, 'class' => 'btn btn-primary btn-sm']);
+                        ?>
+                        <?= $this->Form->postLink(
+                        		'<i class="fa-solid fa-trash"></i> '.__('Delete'),
+                        		['action' => 'delete', $letterformat->id],
+                        		['escape' => false, 'class' => 'btn btn-danger btn-sm', 'confirm' => __('Are you sure you want to delete # {0}?', $letterformat->id)]);
+                        ?>
                     </td>
                 </tr>
                 <?php endforeach; ?>

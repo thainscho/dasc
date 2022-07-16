@@ -6,7 +6,6 @@
  */
 ?>
 
-
 <script>
 
 $(document).ready(function() {
@@ -30,18 +29,20 @@ $(document).ready(function() {
 
 </script>
 
+<h3><?= __('Languages') ?></h3>
+    
+<p>
+Using a two-letter abbreviation according to the ISO 639-1 standard is recommended so that a languag can be uniquely identified. See <a href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes</a> for an overview.
+</p>
+
+<p>
+<?= $this->Html->link(__('Back'), ['action' => 'index']) ?>
+</p>
 
 <div class="row">
     <div class="column-responsive column-80">
         <div class="languages form content">
-        
-            <h3><?= __('Languages') ?></h3>
-    
-  			<p>
-  			Using a two-letter abbreviation according to the ISO 639-1 standard is recommended so that a languag can be uniquely identified. See <a href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes</a> for an overview.
-  			</p>
 
-        
             <?= $this->Form->create($language) ?>
             
             <?php
@@ -57,7 +58,7 @@ $(document).ready(function() {
 					'name',
 					array(
 						'placeholder' => __('Name'),
-						'label' => ['text' => __('Name'), 'class' => 'required'],
+						'label' => ['text' => __('Name of the language'), 'class' => 'required'],
 						'class' => 'form-control'
 					)
 				);

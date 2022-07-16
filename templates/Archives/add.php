@@ -57,7 +57,7 @@
 				echo $this->Form->control(
 					'website',
 					array(
-						'placeholder' => 'Archive website: http://',
+						'placeholder' => 'http://',
 						'label' => 'Archive website',
 						'class' => 'form-control'
 					)

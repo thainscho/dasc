@@ -146,7 +146,7 @@ foreach($letter->manifestations as $manifestation) {
 	
 	echo "Language";
 	if (!isset($manifestation->languages) || count($manifestation->languages) == 0) {
-		echo ": ".__("No information available");
+		echo ": <span class='text-muted fst-italic'>".__("No information available").".</span>";
 	} else {
 		if (count($manifestation->languages) > 1) {
 			echo "s: ";
@@ -161,8 +161,9 @@ foreach($letter->manifestations as $manifestation) {
 			}
 			$langcounter++;
 		}
+		echo '.';
 	}
-	echo ".<br />";
+	echo "<br />";
 	
 	echo '</div>';
 	

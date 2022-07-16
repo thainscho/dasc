@@ -60,3 +60,8 @@ ul.noBulletsList {
 li.verticalSpaceLi {
 	margin-bottom:15px;
 }
+
+/*General HTML*/
+.table td {
+	vertical-align:middle;
+}

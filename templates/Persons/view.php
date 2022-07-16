@@ -129,7 +129,7 @@ if (isset($person->senders) && count($person->senders) > 0) {
 } else {
 	
 	echo '<p class="text-muted fst-italic">';
-	echo __('No correspondence.');
+	echo __('No correspondence');
 	echo '</p>';
 	
 
@@ -157,7 +157,7 @@ if (isset($person->receivers) && count($person->receivers) > 0) {
 } else {
 	
 	echo '<p class="text-muted fst-italic">';
-	echo __('No correspondence.');
+	echo __('No correspondence');
 	echo '</p>';
 	
 	
