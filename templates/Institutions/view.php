@@ -4,95 +4,98 @@
  * @var \App\Model\Entity\Institution $institution
  */
 ?>
-<div class="row">
-    <aside class="column">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('Edit Institution'), ['action' => 'edit', $institution->id], ['class' => 'side-nav-item']) ?>
-            <?= $this->Form->postLink(__('Delete Institution'), ['action' => 'delete', $institution->id], ['confirm' => __('Are you sure you want to delete # {0}?', $institution->id), 'class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('List Institutions'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('New Institution'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
-        </div>
-    </aside>
-    <div class="column-responsive column-80">
-        <div class="institutions view content">
-            <h3><?= h($institution->name) ?></h3>
-            <table>
-                <tr>
-                    <th><?= __('Name') ?></th>
-                    <td><?= h($institution->name) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Dbpedia Url') ?></th>
-                    <td><?= h($institution->dbpedia_url) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Id') ?></th>
-                    <td><?= $this->Number->format($institution->id) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Created') ?></th>
-                    <td><?= h($institution->created) ?></td>
-                </tr>
-            </table>
-            <div class="related">
-                <h4><?= __('Related Receivers') ?></h4>
-                <?php if (!empty($institution->receivers)) : ?>
-                <div class="table-responsive">
-                    <table>
-                        <tr>
-                            <th><?= __('Id') ?></th>
-                            <th><?= __('Letter Id') ?></th>
-                            <th><?= __('Person Id') ?></th>
-                            <th><?= __('Institution Id') ?></th>
-                            <th class="actions"><?= __('Actions') ?></th>
-                        </tr>
-                        <?php foreach ($institution->receivers as $receivers) : ?>
-                        <tr>
-                            <td><?= h($receivers->id) ?></td>
-                            <td><?= h($receivers->letter_id) ?></td>
-                            <td><?= h($receivers->person_id) ?></td>
-                            <td><?= h($receivers->institution_id) ?></td>
-                            <td class="actions">
-                                <?= $this->Html->link(__('View'), ['controller' => 'Receivers', 'action' => 'view', $receivers->id]) ?>
-                                <?= $this->Html->link(__('Edit'), ['controller' => 'Receivers', 'action' => 'edit', $receivers->id]) ?>
-                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Receivers', 'action' => 'delete', $receivers->id], ['confirm' => __('Are you sure you want to delete # {0}?', $receivers->id)]) ?>
-                            </td>
-                        </tr>
-                        <?php endforeach; ?>
-                    </table>
-                </div>
-                <?php endif; ?>
-            </div>
-            <div class="related">
-                <h4><?= __('Related Senders') ?></h4>
-                <?php if (!empty($institution->senders)) : ?>
-                <div class="table-responsive">
-                    <table>
-                        <tr>
-                            <th><?= __('Id') ?></th>
-                            <th><?= __('Letter Id') ?></th>
-                            <th><?= __('Person Id') ?></th>
-                            <th><?= __('Institution Id') ?></th>
-                            <th class="actions"><?= __('Actions') ?></th>
-                        </tr>
-                        <?php foreach ($institution->senders as $senders) : ?>
-                        <tr>
-                            <td><?= h($senders->id) ?></td>
-                            <td><?= h($senders->letter_id) ?></td>
-                            <td><?= h($senders->person_id) ?></td>
-                            <td><?= h($senders->institution_id) ?></td>
-                            <td class="actions">
-                                <?= $this->Html->link(__('View'), ['controller' => 'Senders', 'action' => 'view', $senders->id]) ?>
-                                <?= $this->Html->link(__('Edit'), ['controller' => 'Senders', 'action' => 'edit', $senders->id]) ?>
-                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Senders', 'action' => 'delete', $senders->id], ['confirm' => __('Are you sure you want to delete # {0}?', $senders->id)]) ?>
-                            </td>
-                        </tr>
-                        <?php endforeach; ?>
-                    </table>
-                </div>
-                <?php endif; ?>
-            </div>
-        </div>
-    </div>
-</div>
+
+<h3>
+<?php echo $institution->name; ?><br />
+</h3>
+
+<dl class="row">
+
+	<dt class="col-sm-2"><?php echo __("Name"); ?></dt>
+	<dd class="col-sm-10">
+	<?php
+	if ($institution->name != "" && !is_null($institution->name)) {
+		echo '<p>';
+		echo $institution->name;
+		echo '</p>';
+	} else {
+		echo '<p class="text-muted fst-italic">';
+		echo __("Unknown");
+		echo '</p>';
+	}
+	?>
+	</dd>
+	
+	<dt class="col-sm-2">DBpedia URL</dt>
+	<dd class="col-sm-10">
+	<?php
+	if ($institution->dbpedia_url != "" && !is_null($institution->dbpedia_url)) {
+		echo '<p>';
+		echo $institution->dbpedia_url;
+		echo '</p>';
+	} else {
+		echo '<p class="text-muted fst-italic">';
+		echo __("Unknown");
+		echo '</p>';
+	}
+	?>
+	</dd>
+
+</dl>
+
+
+<h3>
+<small>Sent correspondence</small>
+</h3>
+
+<?php
+
+if (isset($institution->senders) && count($institution->senders) > 0) {
+
+	echo '<ul>';
+	foreach($institution->senders as $sender) {
+		
+		echo '<li>';
+		echo $this->Html->link($sender->letter->detailed_info, ['controller' => 'letters', 'action' => 'view', $sender->letter_id]);
+		echo '</li>';
+		
+	}
+	echo '</ul>';
+	
+} else {
+	
+	echo '<p class="text-muted fst-italic">';
+	echo __('No correspondence.');
+	echo '</p>';
+
+}
+?>
+
+<h3>
+<small>Received correspondence</small>
+</h3>
+
+<?php
+
+if (isset($institution->receivers) && count($institution->receivers) > 0) {
+	
+	echo '<ul>';
+	foreach($institution->receivers as $receiver) {
+		
+		echo '<li>';
+		echo $this->Html->link($receiver->letter->detailed_info, ['controller' => 'letters', 'action' => 'view', $receiver->letter_id]);
+		echo '</li>';
+		
+	}
+	echo '</ul>';
+	
+} else {
+	
+	echo '<p class="text-muted fst-italic">';
+	echo __('No correspondence.');
+	echo '</p>';
+	
+	
+}
+
+?>

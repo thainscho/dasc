@@ -4,15 +4,17 @@
  * @var \App\Model\Entity\Institution[]|\Cake\Collection\CollectionInterface $institutions
  */
 ?>
+
+<h3><?= __('Institutions') ?></h3>
+    
+<p>Data records of institutions are managed here. A record of an institution is required in order to sepcifiy it as sender or recipient of correspondence.</p>
+    
+<p>
+<?= $this->Html->link('<i class="fa-solid fa-plus"></i> '.__('Create new institution'), ['action' => 'add'], ['escape' => false, 'class' => 'btn-primary btn btn-small']) ?>
+</p>
+    
 <div class="institutions index content">
-    <h3><?= __('Institutions') ?></h3>
-    
-    <p>Data records of instituions are managed here. A record of an instituion is required in order to sepcifiy it as sender or recipient of a letter.</p>
-    
-    <p>
-    	<?= $this->Html->link(__('Create new institution'), ['action' => 'add'], ['class' => 'button float-right']) ?>
-    </p>
-    
+   
     <div class="table-responsive">
         <table class="table">
             <thead>
@@ -31,10 +33,22 @@
                     <td><?= h($institution->name) ?></td>
                     <td><?= h($institution->dbpedia_url) ?></td>
                     <td><?= h($institution->created) ?></td>
-                    <td class="actions">
-                        <?= $this->Html->link(__('View'), ['action' => 'view', $institution->id]) ?>
-                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $institution->id]) ?>
-                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $institution->id], ['confirm' => __('Are you sure you want to delete # {0}?', $institution->id)]) ?>
+                    <td>
+                        <?= $this->Html->link(
+                        		'<i class="fa-solid fa-eye"></i> '.__('View'),
+                        		['action' => 'view', $institution->id],
+                        		['escape' => false, 'class' => 'btn btn-primary btn-sm']);
+                        ?>
+                        <?= $this->Html->link(
+                        		'<i class="fa-solid fa-pen"></i> '.__('Edit'),
+                        		['action' => 'edit', $institution->id],
+                        		['escape' => false, 'class' => 'btn btn-primary btn-sm']);
+                        ?>
+                        <?= $this->Form->postLink(
+                        		'<i class="fa-solid fa-trash"></i> '.__('Delete'),
+                        		['action' => 'delete', $institution->id],
+                        		['escape' => false, 'class' => 'btn btn-danger btn-sm', 'confirm' => __('Are you sure you want to delete # {0}?', $institution->id)]);
+                        ?>
                     </td>
                 </tr>
                 <?php endforeach; ?>

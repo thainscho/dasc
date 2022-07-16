@@ -5,9 +5,14 @@
  */
 ?>
 
-<div class="row">
+<!-- <div class="index content"> -->
+
+
+<div class="row headerDiv">
 <h3>About DASC<br /><small>Digital Archival System for Correspondence</small></h3>
 </div>
+
+
 <div class="row">
     <div class="col-sm-8">
 		<p>The Digital Archival System for Correspondence (DASC) is a software tool that allows to collect metadata from correspondence. It is intended to support researchers and archivists in their archival work. DASC makes it possible to digitally record the holdings of an archive but also allows to store correspondence from specific persons, topics or epochs across archive boundaries.</p>
@@ -64,3 +69,4 @@ echo '</div>';
 
 	</div>
 </div>
+<!-- </div> -->

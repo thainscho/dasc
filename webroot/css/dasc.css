@@ -26,12 +26,23 @@ fieldset legend {
 }
   
 .main { /* Main content container */
-	margin-top: 20px;
+	margin-top: 40px;
+}
+
+.headerDiv { /*Div for the headlines*/
+	margin-bottom: 10px;
 }
 
 div h3, h4 { /* Headlines in main content container */
-  font-size: 1.3em !important;	
-  font-weight: bold !important;	
+	font-size: 1.3em !important;	
+	font-weight: bold !important;	
+}
+
+h3 small {
+	padding-top: 6px;
+	display: inline-block;
+	font-weight: normal;
+	font-size: .775em;
 }
 
 /*About page*/

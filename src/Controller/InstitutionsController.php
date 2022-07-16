@@ -30,13 +30,14 @@ class InstitutionsController extends AppController
      * @return \Cake\Http\Response|null|void Renders view
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view($id = null)
-    {
+    public function view($id = null) {
+    	
         $institution = $this->Institutions->get($id, [
-            'contain' => ['Receivers', 'Senders'],
+        	'contain' => ['Receivers' => ['Letters' => ['Letterformats', 'Senders' => ['Persons', 'Institutions'], 'Receivers' => ['Persons', 'Institutions']]], 'Senders' => ['Letters' => ['Letterformats', 'Senders' => ['Persons', 'Institutions'], 'Receivers' => ['Persons', 'Institutions']]]],
         ]);
 
         $this->set(compact('institution'));
+        
     }
 
     /**

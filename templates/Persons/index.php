@@ -4,16 +4,18 @@
  * @var \App\Model\Entity\Person[]|\Cake\Collection\CollectionInterface $persons
  */
 ?>
+
+<h3><?= __('Persons') ?></h3>
+    
+<p>Data records of individual persons are managed here. A record of a person is required to specify them as sender or recipient of correspondence.</p>
+    
+<p>
+<?= $this->Html->link('<i class="fa-solid fa-plus"></i> '.__('Create new person'), ['action' => 'add'], ['escape' => false, 'class' => 'btn-primary btn btn-small']) ?>
+</p>
+    
 <div class="persons index content">
-    <h3><?= __('Persons') ?></h3>
     
-    <p>Data records of individual persons are managed here. A record of a person is required in order to sepcify them as sender or recipient of a letter.</p>
-    
-    <p>
-	<?= $this->Html->link(__('Create new person'), ['action' => 'add'], ['class' => 'button float-right']) ?>
-	</p>
-    
-    <div class="table-responsive">
+ <div class="table-responsive">
         <table class="table">
             <thead>
                 <tr>
@@ -38,10 +40,22 @@
                     <td><?php echo $person->getLifeDates(); ?></td>
                     <!-- <td><?= $person->dayofbirth === null ? '' : $this->Number->format($person->dayofbirth, ['locale' => 'de_DE']) ?></td> //-->
                     <td><?= h($person->created) ?></td>
-                    <td class="actions">
-                        <?= $this->Html->link(__('View'), ['action' => 'view', $person->id]) ?>
-                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $person->id]) ?>
-                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $person->id], ['confirm' => __('Are you sure you want to delete # {0}?', $person->id)]) ?>
+                    <td>
+                        <?= $this->Html->link(
+                        		'<i class="fa-solid fa-eye"></i> '.__('View'),
+                        		['action' => 'view', $person->id],
+                        		['escape' => false, 'class' => 'btn btn-primary btn-sm']);
+                        ?>
+                        <?= $this->Html->link(
+                        		'<i class="fa-solid fa-pen"></i> '.__('Edit'),
+                        		['action' => 'edit', $person->id],
+                        		['escape' => false, 'class' => 'btn btn-primary btn-sm']);
+                        ?>
+                        <?= $this->Form->postLink(
+                        		'<i class="fa-solid fa-trash"></i> '.__('Delete'),
+                        		['action' => 'delete', $person->id],
+                        		['escape' => false, 'class' => 'btn btn-danger btn-sm', 'confirm' => __('Are you sure you want to delete # {0}?', $person->id)]);
+                        ?>
                     </td>
                 </tr>
                 <?php endforeach; ?>

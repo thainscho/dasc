@@ -68,7 +68,7 @@
 	<?php
 	foreach($letter->receivers as $receiver) {
 		echo '<p>';
-		echo $this->Html->link($receiver->ReceiverNameWithDetail, ['controller' => 'receivers', 'action' => 'view', $sender->id]);
+		echo $this->Html->link($receiver->ReceiverNameWithDetail, ['controller' => 'receivers', 'action' => 'view', $receiver->id]);
 		echo '</p>';
 	}
 	?>

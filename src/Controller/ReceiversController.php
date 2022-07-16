@@ -33,13 +33,26 @@ class ReceiversController extends AppController
      * @return \Cake\Http\Response|null|void Renders view
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view($id = null)
-    {
+    public function view($id = null) {
+    	
         $receiver = $this->Receivers->get($id, [
-            'contain' => ['Letters', 'Persons', 'Institutions'],
+            'contain' => ['Persons', 'Institutions'],
         ]);
 
-        $this->set(compact('receiver'));
+        if (!is_null($receiver->person_id)) {
+        	return $this->redirect([
+        		'controller' => 'Persons',
+        		'action' => 'view',
+        		$receiver->person_id
+        	]);
+        } else {
+        	return $this->redirect([
+        		'controller' => 'Institutions',
+        		'action' => 'view',
+        		$receiver->institution_id
+        	]);
+        }
+        
     }
 
     /**
