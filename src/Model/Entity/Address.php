@@ -9,9 +9,10 @@ use Cake\ORM\Entity;
  * Address Entity
  *
  * @property int $id
+ * @property string|null $dbpedia_url
  * @property string|null $addressline
  * @property string|null $street
- * @property string $streetnumber
+ * @property string|null $streetnumber
  * @property string|null $postalcode
  * @property string $city
  * @property int $nationalstate_id
@@ -19,9 +20,10 @@ use Cake\ORM\Entity;
  *
  * @property \App\Model\Entity\Nationalstate $nationalstate
  * @property \App\Model\Entity\Archive[] $archives
+ * @property \App\Model\Entity\Letter[] $letter_from
+ * @property \App\Model\Entity\Letter[] $letter_to
  */
-class Address extends Entity
-{
+class Address extends Entity {
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
      *
@@ -32,6 +34,7 @@ class Address extends Entity
      * @var array<string, bool>
      */
     protected $_accessible = [
+        'dbpedia_url' => true,
         'addressline' => true,
         'street' => true,
         'streetnumber' => true,
@@ -41,8 +44,9 @@ class Address extends Entity
         'created' => true,
         'nationalstate' => true,
         'archives' => true,
+        //'letter_from' => true,
+     	//'letter_to' => true,
     ];
-    
     
     /**
      * Virtual Field for display in select

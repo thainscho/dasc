@@ -170,7 +170,7 @@ foreach($letter->manifestations as $manifestation) {
 	echo '<ul class="list-group list-group-flush">
 	<li class="list-group-item">';
 	
-	echo "Signed by: ";
+	echo "Signature: ";
 	if (isset($signatures[$manifestation->id]) && count($signatures[$manifestation->id]) > 0) {
 		$tmps = array();
 		foreach($signatures[$manifestation->id]['annotation'] as $signature) {
@@ -200,7 +200,7 @@ foreach($letter->manifestations as $manifestation) {
 	echo '</li>
 	<li class="list-group-item">';
 	
-	echo "Annotated by: ";
+	echo "Annotations: ";
 	if (isset($annotations[$manifestation->id]) && count($annotations[$manifestation->id]) > 0) {
 		$tmps = array();
 		foreach($annotations[$manifestation->id]['annotation'] as $annotation) {

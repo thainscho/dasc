@@ -55,6 +55,14 @@ class AddressesTable extends Table
         $this->hasMany('Archives', [
             'foreignKey' => 'address_id',
         ]);
+        $this->hasMany('LetterFrom', [
+        	'className' => 'Letters',
+        	'foreignKey' => 'address_from_id',
+        ]);
+        $this->hasMany('LetterTo', [
+        	'className' => 'Letters',
+        	'foreignKey' => 'address_to_id',
+        ]);  
     }
 
     /**
@@ -65,6 +73,11 @@ class AddressesTable extends Table
      */
     public function validationDefault(Validator $validator): Validator
     {
+        $validator
+            ->scalar('dbpedia_url')
+            ->maxLength('dbpedia_url', 255)
+            ->allowEmptyString('dbpedia_url');
+
         $validator
             ->scalar('addressline')
             ->maxLength('addressline', 255)
@@ -89,13 +102,18 @@ class AddressesTable extends Table
             ->scalar('city')
             ->maxLength('city', 255)
             ->requirePresence('city', 'create')
-            ->notEmptyString('city');
-
+            ->allowEmptyString('city');
+            
         $validator
             ->integer('nationalstate_id')
             ->requirePresence('nationalstate_id', 'create')
-            ->notEmptyString('nationalstate_id');
+            ->allowEmptyString('nationalstate_id');
 
+		$validator
+            ->scalar('email')
+            ->maxLength('email', 255)
+            ->allowEmptyString('email');
+            
         return $validator;
     }
 
@@ -108,9 +126,8 @@ class AddressesTable extends Table
      */
     public function buildRules(RulesChecker $rules): RulesChecker
     {
-        $rules->add($rules->existsIn('nationalstate_id', 'Nationalstates'), ['errorField' => 'nationalstate_id']);
+        //$rules->add($rules->existsIn('nationalstate_id', 'Nationalstates'), ['errorField' => 'nationalstate_id']);
 
         return $rules;
     }
-   
 }

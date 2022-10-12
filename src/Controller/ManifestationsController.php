@@ -67,7 +67,7 @@ class ManifestationsController extends AppController
     	$letter = null;
     	try {
     		$letter = $this->fetchTable('Letters')->get($letterId, [
-    			'contain' => ['Letterformats', 'Senders' => ['Persons', 'Institutions'], 'Receivers' => ['Persons', 'Institutions'], 'Addresses']
+    			'contain' => ['Letterformats', 'Senders' => ['Persons', 'Institutions'], 'Receivers' => ['Persons', 'Institutions']] // 'AddressFrom', 'AddressTo'
     		]);
     	} catch (Exception $e) {
     		$this->Flash->error('Invalid call. (no datensatz)');

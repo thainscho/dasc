@@ -8,13 +8,17 @@
  * @var \Cake\Collection\CollectionInterface|string[] $writingStyles
  */
 ?>
-<div class="row">
-    <aside class="column">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('List Manifestations'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-        </div>
-    </aside>
+
+<h3><?= __('Pieces of correspondence') ?><br />
+<small><?php echo __('Create a new manifestation for the '); echo '<b>'.$letter->detailed_info.'</b>'; ?></small>
+</h3>
+
+<p>
+<?= $this->Html->link(__('Back'), ['controller' => 'letters', 'action' => 'index']) ?>
+</p>
+
+
+    
     <div class="column-responsive column-80">
         <div class="manifestations form content">
             <?= $this->Form->create($manifestation) ?>
@@ -25,9 +29,6 @@
 				];
 				$this->Form->setTemplates($myTemplates);
 			?>
-		            
-            <p>Create a new manifestation for the <b><?php echo $letter->detailed_info; ?></b>.</p>
- 
  
 			<div class="row form-row">
 	 			<fieldset>
@@ -340,4 +341,4 @@
             <?= $this->Form->end() ?>
         </div>
     </div>
-</div>
+

@@ -24,7 +24,7 @@
                     <th><?= $this->Paginator->sort('firstname', 'First name') ?></th>
                     <th><?= $this->Paginator->sort('dbpedia_url', 'DBpedia URL') ?></th>
                     <th><?= $this->Paginator->sort('gender') ?></th>
-                    <th><?= $this->Paginator->sort('dayofbirth', 'Life date(-s)') ?></th>
+                    <th><?= $this->Paginator->sort('dayofbirth', 'Life dates') ?></th>
                     <th><?= $this->Paginator->sort('created') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
                 </tr>

@@ -32,9 +32,15 @@ class LettersController extends AppController {
     public function index()
     {
         $this->paginate = [
-        	'contain' => ['Letterformats', 'AddressFrom', 'AddressTo'],
+        	'contain' => [
+        		'Letterformats',
+        		'AddressFrom',
+        		'AddressTo',
+        		'Senders' => ['Persons', 'Institutions'],
+        		'Receivers' => ['Persons', 'Institutions']
+        	]
         ];
-        $letters = $this->paginate($this->Letters);
+        $letters = $this->paginate($this->Letters, ['order' => ['id' => 'desc']]);
 
         $this->set(compact('letters'));
     }
@@ -113,10 +119,12 @@ class LettersController extends AppController {
         if ($this->request->is('post')) {
         	
         	$formData = $this->request->getData();
-
             $letter = $this->Letters->patchEntity($letter, $this->request->getData());
             
-           if ($this->Letters->save($letter)) {
+           	//pr($letter);
+			//exit;
+
+			if ($this->Letters->save($letter)) {
             	
             	//Saving the senders
             	$sendersSaved = true;
@@ -196,7 +204,7 @@ class LettersController extends AppController {
             	} else {
             		$this->Flash->warning(__($warningMessage));
             	}
-				return $this->redirect(['action' => 'index']);
+				return $this->redirect(['controller' => 'manifestations', 'action' => 'add/'.$letter->id]);
 				
             }
             $this->Flash->error(__('The letter could not be saved. Please, try again.'));
@@ -229,7 +237,7 @@ class LettersController extends AppController {
     public function edit($id = null)
     {
         $letter = $this->Letters->get($id, [
-            'contain' => [],
+        	'contain' => ['AddressTo', 'AddressFrom'],
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $letter = $this->Letters->patchEntity($letter, $this->request->getData());
@@ -242,13 +250,19 @@ class LettersController extends AppController {
         }
         $letterformats = $this->Letters->Letterformats->find('list', ['limit' => 200])->all();
         
-        $addresses = $this->Letters->AddressTo->find('list', [
+        $addressTo  = $this->Letters->AddressTo->find('list', [
         	'limit' => 200,
         	'keyField' => 'id',
         	'valueField' => 'city'
         ])->all();
         
-        $this->set(compact('letter', 'letterformats', 'addresses'));
+        $addressFrom  = $this->Letters->AddressFrom->find('list', [
+        	'limit' => 200,
+        	'keyField' => 'id',
+        	'valueField' => 'city'
+        ])->all();
+        
+        $this->set(compact('letter', 'letterformats', 'addressTo', 'addressFrom'));
     }
 
     /**

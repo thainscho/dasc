@@ -166,8 +166,9 @@ class LettersTable extends Table
     public function buildRules(RulesChecker $rules): RulesChecker
     {
         $rules->add($rules->existsIn('letterformat_id', 'Letterformats'), ['errorField' => 'letterformat_id']);
-        $rules->add($rules->existsIn('address_from_id', 'Addresses'), ['errorField' => 'address_from_id']);
-        $rules->add($rules->existsIn('address_to_id', 'Addresses'), ['errorField' => 'address_to_id']);
+        //TODO: diese Regeln kontrollieren
+		//$rules->add($rules->existsIn('address_from_id', 'Addresses'), ['errorField' => 'address_from_id']);
+        //$rules->add($rules->existsIn('address_to_id', 'Addresses'), ['errorField' => 'address_to_id']);
 
         return $rules;
     }

@@ -91,7 +91,7 @@ $cakeDescription = 'DASC: Digital Archival System for Letters and Correspondence
 								<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 									<li><?php echo $this->Html->link(__('Persons'), ['controller' => 'persons', 'action' => 'index'], ['class' => 'dropdown-item']) ?></li>
 									<li><?php echo $this->Html->link(__('Institutions'), ['controller' => 'institutions', 'action' => 'index'], ['class' => 'dropdown-item']) ?></li>
-									<li><?php echo $this->Html->link(__('Letters'), ['controller' => 'letters', 'action' => 'index'], ['class' => 'dropdown-item']) ?></li>
+									<li><?php echo $this->Html->link(__('Pieces of correspondence'), ['controller' => 'letters', 'action' => 'index'], ['class' => 'dropdown-item']) ?></li>
 									<li><hr class="dropdown-divider"></li>
 									<li><?php echo $this->Html->link(__('System Administration'), ['controller' => 'pages', 'action' => 'adminpages'], ['class' => 'dropdown-item']) ?></li>
 								</ul></li>

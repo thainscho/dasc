@@ -15,11 +15,11 @@
 
 <div class="row">
     <div class="col-sm-8">
-		<p>The Digital Archival System for Correspondence (DASC) is a software tool that allows to collect metadata from correspondence. It is intended to support researchers and archivists in their archival work. DASC makes it possible to digitally record the holdings of an archive but also allows to store correspondence from specific persons, topics or epochs across archive boundaries.</p>
+		<p>The Digital Archival System for Correspondence (DASC) is a software tool that allows to collect metadata from correspondence. It is intended to support researchers and archivists in their archival work. DASC allows to digitally record the holdings of an archive, in parts or as a whole, and to store correspondence metadata from specific persons, topics or epochs across the physical boundaries of one archive.</p>
 
-		<p>Statistical queries can be performed on captured metadata. It is possible to find out between which correspondents a particularly intensive exchange took place and to generate overviews of how many letters were written in which time periods. Correspondence that has not been preserved can also be recorded in order to provide an overview of the correspondence of a person or a group of persons that is as complete as possible.</p>
+		<p>Statistical queries can be performed on captured metadata. It is possible to find out between which correspondents a particularly intensive exchange took place and to generate overviews of how many letters were written during a given period. Correspondence that has not been preserved can be recorded to obtain an overview of the correspondence of a person or a group of persons that is as complete as possible.</p>
 
-		<p>DASC allows to generate lists of existing material and to generate inventory lists of documents that are normally not recorded as holdings of a library. Such lists can be used for comparison of archival collections or for archival inventory.</p>
+		<p>DASC allows to generate inventory lists of documents that are normally not recorded as holdings of a library. Such lists can be used for comparison of archival collections or for archival inventory.</p>
 
 		<br />
 		<p>DASC is developed by Thomas Hainscho.</p>

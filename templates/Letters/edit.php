@@ -3,7 +3,8 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Letter $letter
  * @var string[]|\Cake\Collection\CollectionInterface $letterformats
- * @var string[]|\Cake\Collection\CollectionInterface $addresses
+ * @var string[]|\Cake\Collection\CollectionInterface $addressFrom
+ * @var string[]|\Cake\Collection\CollectionInterface $addressTo
  */
 ?>
 <div class="row">
@@ -24,16 +25,23 @@
             <fieldset>
                 <legend><?= __('Edit Letter') ?></legend>
                 <?php
-                    echo $this->Form->control('date', ['empty' => true]);
-                    echo $this->Form->control('date_min', ['empty' => true]);
-                    echo $this->Form->control('date_max', ['empty' => true]);
+                    echo $this->Form->control('letterdate_day');
+                    echo $this->Form->control('letterdate_month');
+                    echo $this->Form->control('letterdate_year');
+                    echo $this->Form->control('datemin_day');
+                    echo $this->Form->control('datemin_month');
+                    echo $this->Form->control('datemin_year');
+                    echo $this->Form->control('letterdatecorrected_day');
+                    echo $this->Form->control('letterdatecorrected_month');
+                    echo $this->Form->control('letterdatecorrected_year');
+                    echo $this->Form->control('datemax_day');
+                    echo $this->Form->control('datemax_month');
+                    echo $this->Form->control('datemax_year');
                     echo $this->Form->control('letterformat_id', ['options' => $letterformats]);
-                    echo $this->Form->control('address_from_id');
+                    echo $this->Form->control('address_from_id', ['options' => $addressFrom, 'empty' => true]);
                     echo $this->Form->control('address_from_assumed');
-                    echo $this->Form->control('address_to_id', ['options' => $addresses, 'empty' => true]);
+                    echo $this->Form->control('address_to_id', ['options' => $addressTo, 'empty' => true]);
                     echo $this->Form->control('address_to_assumed');
-                    echo $this->Form->control('isSent');
-                    echo $this->Form->control('draft');
                     echo $this->Form->control('note');
                 ?>
             </fieldset>

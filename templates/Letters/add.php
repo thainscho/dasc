@@ -143,23 +143,100 @@ $(document).ready(function() {
 </script>
 
 
-<div class="row">
-    <aside class="column">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Add letter') ?></h4>
-            <?= $this->Html->link(__('List letters'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-        </div>
-    </aside>
-    <div class="column-responsive column-80">
-        <div class="letters form content">
-            <?= $this->Form->create($letter) ?>
-    <?php
-	$myTemplates = [
-		'inputContainer' => '<div class="col">{{content}}</div>',
-	];
-	$this->Form->setTemplates($myTemplates);
-	?>
+<h3><?= __('Pieces of correspondence') ?><br />
+<small><?php echo __('Create new correspondence record'); ?></small>
+</h3>
+
+<p>
+<?= $this->Html->link(__('Back'), ['action' => 'index']) ?>
+</p>
+
+<div class="column-responsive column-80">
+	<div class="letters form content">
+		<?= $this->Form->create($letter) ?>
+		
+		<?php
+		$myTemplates = [
+			'inputContainer' => '<div class="col">{{content}}</div>',
+		];
+		$this->Form->setTemplates($myTemplates);
+		?>
+
+
+	<fieldset>
+    <legend class="required">Receiver</legend>
+<!-- 		<div class="form-check"> -->
+<!-- 		    <input type="checkbox" class="form-check-input" id="receiverUnknown"> -->
+<!-- 		    <label class="form-check-label" for="receiverUnknown">Receiver unknown</label> -->
+<!-- 		</div> -->
+		
+		<div id="receiverForm">
+		
+			<div class="form-row form-group">
+				<input type="text" class="form-control personSearch" data-field="receiver" id="receiverSearch" aria-describedby="receiverHelp" placeholder="Search for a receiver">
+			</div>
+			
+			<div class="select2-additional-links alert alert-info" id="receiverInfo">
+				If the receiver cannot be found, create a new entry for a <?php echo $this->Html->link('person', ['controller' => 'persons', 'action' => 'add']); ?> or <?php echo $this->Html->link('institution', ['controller' => 'institutions', 'action' => 'add']); ?> (a new page will open).
+			</div>
+			
+			<div class="row form-row form-group">
+				<div class="col">
+					<ul class="list-group list-group-flush" id="receiversList">
+					</ul>
+				</div>
+				<div class="col">
+				</div>
+			</div>
+
+		
+			<div class="row form-row form-group">
+				<div class="col">
+				
+				<?php
+					echo $this->Form->control(
+						'address_to_id', array(
+							'options' => $addresses,
+							'label' => ['text' => 'Receiver’s address as stated on the document'],
+							'empty' => 'Select Address',
+							'class' => 'form-select'
+						)
+					);
+				?>
+		
+				</div>
+			</div>
+			
+			<div class="row form-row form-group">
+				<div class="col">
+				
+				<?php
+					echo $this->Form->control(
+						'address_to_assumed', array(
+							'options' => $addresses,
+							'label' => ['text' => 'Receiver’s address (if the document was not sent from the address as stated)'],
+							'empty' => 'Select Address',
+							'class' => 'form-select'
+						)
+					);
+				?>
+		
+				</div>
+			</div>
+			
+			<div class="select2-additional-links alert alert-info" id="addressInfo">
+				If an address cannot be found, <?php echo $this->Html->link('create a new entry', ['controller' => 'addresses', 'action' => 'add']); ?> (a new page will open).
+			</div>
 	
+				
+		</div>
+		
+	
+	</fieldset>
+	
+	
+	
+
 	<fieldset>
     <legend class="required">Sender</legend>
 <!-- 		<div class="form-check"> -->
@@ -188,154 +265,47 @@ $(document).ready(function() {
 			</div>
 			
 			
-			
-			
-		</div>
-	</fieldset>
-	
-	<fieldset>
-    <legend class="required">Receiver</legend>
-<!-- 		<div class="form-check"> -->
-<!-- 		    <input type="checkbox" class="form-check-input" id="receiverUnknown"> -->
-<!-- 		    <label class="form-check-label" for="receiverUnknown">Receiver unknown</label> -->
-<!-- 		</div> -->
+			<div class="row form-row form-group">
+				<div class="col">
+				
+				<?php
+					echo $this->Form->control(
+						'address_from_id', array(
+							'options' => $addresses,
+							'label' => ['text' => 'Sender’s address as stated on the document'],
+							'empty' => 'Select Address',
+							'class' => 'form-select'
+						)
+					);
+				?>
 		
-		<div id="receiverForm">
-		
-			<div class="form-row form-group">
-				<input type="text" class="form-control personSearch" data-field="receiver" id="receiverSearch" aria-describedby="receiverHelp" placeholder="Search for a receiver">
-			</div>
-			
-			<div class="select2-additional-links alert alert-info" id="receiverInfo">
-				If the receiver cannot be found, create a new entry for a <?php echo $this->Html->link('person', ['controller' => 'persons', 'action' => 'add']); ?> or <?php echo $this->Html->link('institution', ['controller' => 'institutions', 'action' => 'add']); ?> (a new page will open).
+				</div>
 			</div>
 			
 			<div class="row form-row form-group">
 				<div class="col">
-					<ul class="list-group list-group-flush" id="receiversList">
-					</ul>
+				
+				<?php
+					echo $this->Form->control(
+						'address_from_assumed', array(
+							'options' => $addresses,
+							'label' => ['text' => 'Sender’s address (if the document was not sent from the address as stated)'],
+							'empty' => 'Select Address',
+							'class' => 'form-select'
+						)
+					);
+				?>
+		
 				</div>
-				<div class="col">
-				</div>
+			</div>
+
+			<div class="select2-additional-links alert alert-info" id="addressInfo">
+				If an address cannot be found, <?php echo $this->Html->link('create a new entry', ['controller' => 'addresses', 'action' => 'add']); ?> (a new page will open).
 			</div>
 			
 		</div>
 	</fieldset>
-	
-	
-	<fieldset>
-    <legend>Addresses</legend>
-    
-    <?php
-    /*
-    
-<!-- Button to Open the Modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
-  Open modal
-</button>
 
-<!-- The Modal -->
-<div class="modal" id="myModal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-
-      <!-- Modal Header -->
-      <div class="modal-header">
-        <h4 class="modal-title">Modal Heading</h4>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-
-      <!-- Modal body -->
-      <div class="modal-body">
-        Modal body..
-      </div>
-
-      <!-- Modal footer -->
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-      </div>
-
-    </div>
-  </div>
-</div>
-*/
-    ?>
-    
-    <div class="row form-row form-group">
-		<div class="col">
-		
-		<?php
-			echo $this->Form->control(
-				'address_from_id', array(
-					'options' => $addresses,
-					'label' => ['text' => 'Sender’s address as stated on the document'],
-					'empty' => 'Select Address',
-					'class' => 'form-select'
-				)
-			);
-		?>
-
-		</div>
-	</div>
-	
-	<div class="row form-row form-group">
-		<div class="col">
-		
-		<?php
-			echo $this->Form->control(
-				'address_from_assumed', array(
-					'options' => $addresses,
-					'label' => ['text' => 'Sender’s address (if the document was not sent from the address as stated)'],
-					'empty' => 'Select Address',
-					'class' => 'form-select'
-				)
-			);
-		?>
-
-		</div>
-	</div>
-    
-    
-    <div class="row form-row form-group">
-		<div class="col">
-		
-		<?php
-			echo $this->Form->control(
-				'address_to_id', array(
-					'options' => $addresses,
-					'label' => ['text' => 'Receiver’s address as stated on the document'],
-					'empty' => 'Select Address',
-					'class' => 'form-select'
-				)
-			);
-		?>
-
-		</div>
-	</div>
-	
-	<div class="row form-row form-group">
-		<div class="col">
-		
-		<?php
-			echo $this->Form->control(
-				'address_to_assumed', array(
-					'options' => $addresses,
-					'label' => ['text' => 'Receiver’s address (if the document was not sent from the address as stated)'],
-					'empty' => 'Select Address',
-					'class' => 'form-select'
-				)
-			);
-		?>
-
-		</div>
-	</div>
-
-	<div class="select2-additional-links alert alert-info" id="addressInfo">
-		If an address cannot be found, <?php echo $this->Html->link('create a new entry', ['controller' => 'addresses', 'action' => 'add']); ?> (a new page will open).
-	</div>
-
-    </fieldset>
-	
 	<fieldset>
     <legend>Date</legend>
     <?php
@@ -438,4 +408,4 @@ $(document).ready(function() {
 	<?= $this->Form->end() ?>
         </div>
     </div>
-</div>
+

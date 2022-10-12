@@ -4,24 +4,29 @@
  * @var \App\Model\Entity\Letter[]|\Cake\Collection\CollectionInterface $letters
  */
 ?>
-<div class="letters index content">
-    <?= $this->Html->link(__('New Letter'), ['action' => 'add'], ['class' => 'button float-right']) ?>
-    <h3><?= __('Letters') ?></h3>
+
+<h3><?= __('Pieces of correspondence') ?></h3>
+    
+<p>The correspondence data records are managed here.</p>
+    
+<p>
+<?= $this->Html->link('<i class="fa-solid fa-plus"></i> '.__('Create new piece of correspondence'), ['action' => 'add'], ['escape' => false, 'class' => 'btn-primary btn btn-small']) ?>
+</p>
+
+
+<div class="institutions index content">
+   
     <div class="table-responsive">
-        <table>
+        <table class="table">
             <thead>
                 <tr>
-                    <th><?= $this->Paginator->sort('id') ?></th>
-                    <th><?= $this->Paginator->sort('date') ?></th>
-                    <th><?= $this->Paginator->sort('date_min') ?></th>
-                    <th><?= $this->Paginator->sort('date_max') ?></th>
-                    <th><?= $this->Paginator->sort('letterformat_id') ?></th>
-                    <th><?= $this->Paginator->sort('address_from_id') ?></th>
-                    <th><?= $this->Paginator->sort('address_from_assumed') ?></th>
-                    <th><?= $this->Paginator->sort('address_to_id') ?></th>
-                    <th><?= $this->Paginator->sort('address_to_assumed') ?></th>
-                    <th><?= $this->Paginator->sort('isSent') ?></th>
-                    <th><?= $this->Paginator->sort('draft') ?></th>
+                    <th><?= $this->Paginator->sort('id', 'ID') ?></th>
+                    <th><?= $this->Paginator->sort('date', 'Date') ?></th>
+                    <th><?= $this->Paginator->sort('letterformat_id', 'Format') ?></th>
+                    <th><?= $this->Paginator->sort('Receiver') ?></th>
+                    <th><?= $this->Paginator->sort('address_to_id', 'Sent to (address)') ?></th>
+                    <th><?= $this->Paginator->sort('Sender') ?></th>
+                    <th><?= $this->Paginator->sort('address_from_id', 'Sent from (address)') ?></th>
                     <th><?= $this->Paginator->sort('created') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
                 </tr>
@@ -31,20 +36,78 @@
                 <tr>
                     <td><?= $this->Number->format($letter->id) ?></td>
                     <td><?= h($letter->date) ?></td>
-                    <td><?= h($letter->date_min) ?></td>
-                    <td><?= h($letter->date_max) ?></td>
-                    <td><?= $letter->has('letterformat') ? $this->Html->link($letter->letterformat->name, ['controller' => 'Letterformats', 'action' => 'view', $letter->letterformat->id]) : '' ?></td>
-                    <td><?= $letter->address_from_id === null ? '' : $this->Number->format($letter->address_from_id) ?></td>
-                    <td><?= $letter->address_from_assumed === null ? '' : $this->Number->format($letter->address_from_assumed) ?></td>
-                    <td><?= $letter->has('address') ? $this->Html->link($letter->address->id, ['controller' => 'Addresses', 'action' => 'view', $letter->address->id]) : '' ?></td>
-                    <td><?= $letter->address_to_assumed === null ? '' : $this->Number->format($letter->address_to_assumed) ?></td>
-                    <td><?= $this->Number->format($letter->isSent) ?></td>
-                    <td><?= $letter->draft === null ? '' : $this->Number->format($letter->draft) ?></td>
+                    <td>
+                    	<?php
+                    	
+                    	if ($letter->has('letterformat')) {
+                    		echo $letter->letterformat->name;	
+                    	} else {
+                    		echo 'n.a.';
+                    	}
+                    	//_getFullAddress
+                    	?>
+                    </td>
+                    <td>
+                    <?php
+
+                    	$i = 0;
+                    	$counterLimit = count($letter->receivers);
+                    	foreach($letter->receivers as $receiver) {
+	                    	
+	                    	$i++;
+	                    	echo $this->Html->link($receiver->ReceiverName, ['controller' => 'senders', 'action' => 'view', $receiver->id]);
+	                    	if ($i < $counterLimit) {
+	                    		echo ', ';
+	                    	}
+	                    	
+	                    }
+	      
+                    ?>
+                    </td>
+                    <td>
+                    <?php
+                    	echo $letter->to_address_full;
+                    ?>
+                    </td>
+                    <td>
+                    <?php
+
+                    	$i = 0;
+                    	$counterLimit = count($letter->senders);
+						foreach($letter->senders as $sender) {
+	                    	
+	                    	$i++;
+	                    	echo $this->Html->link($sender->SenderName, ['controller' => 'senders', 'action' => 'view', $sender->id]);
+	                    	if ($i < $counterLimit) {
+	                    		echo ', ';
+	                    	}
+	                    	
+	                    }
+        
+                    ?>
+                    </td>
+                    <td>
+                    <?php
+                    	echo $letter->from_address_full;
+                    ?>
+                    </td>
                     <td><?= h($letter->created) ?></td>
-                    <td class="actions">
-                        <?= $this->Html->link(__('View'), ['action' => 'view', $letter->id]) ?>
-                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $letter->id]) ?>
-                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $letter->id], ['confirm' => __('Are you sure you want to delete # {0}?', $letter->id)]) ?>
+                    <td>
+                        <?= $this->Html->link(
+                        		'<i class="fa-solid fa-eye"></i> '.__('View'),
+                        		['action' => 'view', $letter->id],
+                        		['escape' => false, 'class' => 'btn btn-primary btn-sm']);
+                        ?>
+                        <?= $this->Html->link(
+                        		'<i class="fa-solid fa-pen"></i> '.__('Edit'),
+                        		['action' => 'edit', $letter->id],
+                        		['escape' => false, 'class' => 'btn btn-primary btn-sm']);
+                        ?>
+                        <?= $this->Form->postLink(
+                        		'<i class="fa-solid fa-trash"></i> '.__('Delete'),
+                        		['action' => 'delete', $letter->id],
+                        		['escape' => false, 'class' => 'btn btn-danger btn-sm', 'confirm' => __('Are you sure you want to delete # {0}?', $letter->id)]);
+                        ?>
                     </td>
                 </tr>
                 <?php endforeach; ?>
