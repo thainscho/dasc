@@ -53,6 +53,9 @@ class AnnotationsTable extends Table
         $this->belongsTo('Senders', [
             'foreignKey' => 'sender_id',
         ]);
+        $this->belongsTo('Persons', [
+        	'foreignKey' => 'person_id',
+        ]);
     }
 
     /**

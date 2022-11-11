@@ -8,6 +8,82 @@
  * @var \Cake\Collection\CollectionInterface|string[] $writingStyles
  */
 ?>
+<script>
+
+$(document).ready(function() {
+    
+    $(function() {
+		$(".personSearch").autocomplete({
+			minLength:2,
+        	source: function(request, response) {
+ 				$.ajax({
+ 					url: "../../persons/getPersonByName",
+ 					dataType: "json",
+                    data: {name:request.term},
+                	success: function(data) {
+                	
+						response($.map(data, function(object) {
+							return {
+								label: object.name,
+								htmllabel: object.label,
+								value: object.id,
+								type: object.type
+	                        };
+						}));
+
+					}
+					
+				});
+				
+ 			},
+ 			select: function(event, ui) {
+
+ 				var dataField = $(this).data("field");
+ 				
+ 				var additionalHtml = "<div class='form-check'>";
+ 				additionalHtml += "<input type='checkbox' class='form-check-input' id='annotations-person"+ui.item.value+"' name='manifestationAnnotations[_personIds][]' value='"+ui.item.value+"' />";
+ 				additionalHtml += "<label class='form-check-label checkbox-label' for='annotations-person"+ui.item.value+"'>"+ui.item.htmllabel+"</label>";
+ 				additionalHtml += "</div";
+
+ 				if (ui.item.type == "person") {
+ 					newHiddenInputId = "hidden-person-"+dataField+"-"+ui.item.value;
+	 				newHiddenInput = "<input type='hidden' name='"+dataField+"spersons[_ids][]' value='"+ui.item.value+"' id='"+newHiddenInputId+"' />";
+ 			
+	 				//check if the person/institution has already been added
+	 				if($("#annotations-person"+ui.item.value).length > 0) {
+	 				
+						alert(ui.item.htmllabel+" has already been added.");
+						return false;
+						
+					} else {
+	 				
+						$("#annotators").append(additionalHtml);
+		 				//$("#hiddenFields").append(newHiddenInput);
+		 				//$("#"+dataField+"Info").hide();
+		
+		 				$("#"+dataField+"Search").val("");
+		 				console.log($("#"+dataField+"Search").val());
+		 				return false;
+		 				
+		 			}
+		 			
+		 		} else {
+		 		
+					return false;
+		 		
+		 		}
+	 			
+ 			},
+ 			
+		});
+	});     
+    
+    
+});
+
+
+</script>
+
 
 <h3><?= __('Pieces of correspondence') ?><br />
 <small><?php echo __('Create a new manifestation for the '); echo '<b>'.$letter->detailed_info.'</b>'; ?></small>
@@ -209,7 +285,12 @@
 							
 							who have annotated the document.
 						</div>
+						
+						<div class="form-row form-group">
+							<input type="text" class="form-control personSearch" data-field="receiver" id="receiverSearch" aria-describedby="receiverHelp" placeholder="Search for persons not listed here">
+						</div>
 							
+						<div id="annotators">
 							<?php
 						
 							foreach($letter->receivers as $tmp) {
@@ -245,6 +326,7 @@
 							}
 							
 							?>
+						</div>
 							
 		    		</fieldset>
 	    		</div>

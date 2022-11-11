@@ -91,7 +91,10 @@ class Receiver extends Entity
     			if ($this->person->yearofdeath != "" && $this->person->yearofdeath != "0000") { $name .= "/"; }
     			$name .= $this->person->yearofdeathUpper;
     		}
-    		$name .= ")";
+    		if ($birthYearGiven) {
+    			$name .= ")";
+    		}
+    		
     	}
     	
     	return $name;

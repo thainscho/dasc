@@ -9,8 +9,6 @@
 <script>
 
 $(document).ready(function() {
-
-    console.log( "ready!" );
     
     <?php
     /*
@@ -50,7 +48,6 @@ $(document).ready(function() {
 		if ($("#"+senderreceiver+"sList").children().length == 0) {
 			$("#"+senderreceiver+"Info").show();
 		}
-		
 		
 		//TODO: delete id
   	});

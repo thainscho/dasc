@@ -164,23 +164,25 @@ class PersonsController extends AppController
 				'name' => $_REQUEST['name'],
 				'id' => $this->request->getData("name")
 			);
-			$responseArray = array("1","2","3","4","5","6","7");
-			$responseArray = array();
-			
-			$responseArray[] = ['id' => 1, 'name' => "thomas", 'type' => 'person'];
-			$responseArray[] = ['id' => 2, 'name' => "katharina", 'type' => 'institution'];
-			$responseArray[] = ['id' => 3, 'name' => "monika", 'type' => 'person'];
-			
 			
 			$responseArray = array();
 			
 			$query = $this->Persons->find('all', [
-				'conditions' => ['LOWER(lastname) LIKE' => '%'.strtolower($_REQUEST['name']).'%'],
+				'conditions' => [
+					'or' => [
+						'LOWER(lastname) LIKE' => '%'.strtolower($_REQUEST['name']).'%',
+						'LOWER(firstname) LIKE' => '%'.strtolower($_REQUEST['name']).'%'
+					]
+				],
 				'limit' => 5
 			]);
 			$query = $query->toArray();
 			foreach($query as $key => $val) {
-				$responseArray[strtolower($val['lastname'].$val['firstname'])] = ['id' => $val['id'], 'name' => strtoupper($val['lastname']).', '.$val['firstname'], 'type' => 'person'];
+				$responseArray[strtolower($val['lastname'].$val['firstname'])] = [
+					'id' => $val['id'],
+					'name' => strtoupper($val['lastname']).', '.$val['firstname'],
+					'label' => $val['firstname'].' '.$val['lastname'],
+					'type' => 'person'];
 			}
 			
 			$query = $this->fetchTable('Institutions')->find('all', [
@@ -189,7 +191,7 @@ class PersonsController extends AppController
 			]);
 			$query = $query->toArray();
 			foreach($query as $key => $val) {
-				$responseArray[strtolower($val['name'])] = ['id' => $val['id'], 'name' => $val['name'], 'type' => 'institution'];
+				$responseArray[strtolower($val['name'])] = ['id' => $val['id'], 'name' => $val['name'], 'label' => $val['name'], 'type' => 'institution'];
 			}
 			ksort($responseArray);
 			

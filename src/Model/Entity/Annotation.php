@@ -12,6 +12,7 @@ use Cake\ORM\Entity;
  * @property int $manifestation_id
  * @property int|null $receiver_id
  * @property int|null $sender_id
+ * @property int|null $person_id
  *
  * @property \App\Model\Entity\Manifestation $manifestation
  * @property \App\Model\Entity\Person $person
@@ -31,6 +32,7 @@ class Annotation extends Entity
         'manifestation_id' => true,
         'receiver_id' => true,
         'sender_id' => true,
+        'person_id' => true,
         'manifestation' => true,
         'person' => true,
     ];

@@ -59,6 +59,10 @@
 	<p>
 	<?php
 		echo $letter->from_address_full;
+		if ($letter->from_address_full == "") {
+			echo "&nbsp;";
+		}
+
 	?>
 	</p>
 	</dd>
