@@ -58,7 +58,6 @@ class PersonsController extends AppController
 		if ($this->request->is('post')) {
 			$person = $this->Persons->patchEntity($person, $this->request->getData());
 			
-			
 			if ($person->getErrors()) {
 				
 				echo "ja, es gibt fehler";

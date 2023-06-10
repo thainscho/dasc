@@ -323,7 +323,7 @@ $(document).ready(function() {
 		$months[8] = 'August';
 		$months[9] = 'September';
 		$months[10] = 'October';
-		$months[12] = 'November';
+		$months[11] = 'November';
 		$months[12] = 'December';
 			
 	?>

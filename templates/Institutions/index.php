@@ -7,7 +7,7 @@
 
 <h3><?= __('Institutions') ?></h3>
     
-<p>Data records of institutions are managed here. A record of an institution is required in order to sepcifiy it as sender or recipient of correspondence.</p>
+<p>Data records of institutions are managed here. A record of an institution is required in order to sepecifiy it as sender or recipient of correspondence.</p>
     
 <p>
 <?= $this->Html->link('<i class="fa-solid fa-plus"></i> '.__('Create new institution'), ['action' => 'add'], ['escape' => false, 'class' => 'btn-primary btn btn-small']) ?>

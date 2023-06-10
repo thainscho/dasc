@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
+use Cake\ORM\Locator\LocatorAwareTrait;
 
 /**
  * Letter Entity
@@ -129,7 +130,23 @@ class Letter extends Entity
     
     public function _getSentDate() {
     	
+    	
     	$value = "";
+    	
+    	if (!is_null($this->letterdate_day) || !is_null($this->letterdate_month) || !is_null($this->letterdate_year)) {
+    		$value .=  $this->letterdate_day.'.'.$this->letterdate_month.'.'.$this->letterdate_year;
+    	}
+    	if (!is_null($this->letterdatecorrected_day ) || !is_null($this->letterdatecorrected_month) || !is_null($this->letterdatecorrected_year)) {
+    		$value .=  ' [correct: '.$this->letterdatecorrected_day.'.'.$this->letterdatecorrected_month.'.'.$this->letterdatecorrected_year.']';
+    	}
+    	
+    	if ((!is_null($this->datemin_day) || !is_null($this->datemin_month) || !is_null($this->datemin_year)) &&
+    			(!is_null($this->datemax_day) || !is_null($this->datemax_month) || !is_null($this->datemax_year))) {
+    				$value .=  'between '.$this->datemin_day.'.'.$this->datemin_month.'.'.$this->datemin_year;
+    				$value .=  ' and '.$this->datemax_day.'.'.$this->datemax_month.'.'.$this->datemax_year;
+    			}
+    	
+    	/*$value = "";
     	if (!is_null($this->letterdate_day) && !is_null($this->letterdate_month) && !is_null($this->letterdate_year)) {
     		if (is_null($this->letterdate_day)) {
     			$value .= "?.";
@@ -167,7 +184,7 @@ class Letter extends Entity
     		}
     		$value .= "]";
     	}
-    	
+    	*/
     	return $value;
     	
     }
@@ -248,7 +265,10 @@ class Letter extends Entity
     		}
     		$returnValue .= $var->city;
     	}
-    	//TODO: Nationalsatet
+
+    	if (isset($var->nationalstate) && $var->nationalstate->abbreviation != "") {
+	    	$returnValue .= ' ('.$var->nationalstate->abbreviation.')';
+    	}
     	
     	return $returnValue;
     	

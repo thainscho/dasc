@@ -57,8 +57,8 @@ class LettersController extends AppController {
         $letter = $this->Letters->get($id, [
         	'contain' => [
         		'Letterformats',
-        		'AddressTo',
-        		'AddressFrom',
+        		'AddressTo' => ['Nationalstates'],
+        		'AddressFrom' => ['Nationalstates'],
         		'Manifestations' => ['Archives', 'Languages', 'Signatures' => ['Senders'], 'Annotations'],
         		'Senders' => ['Persons', 'Institutions'],
         		'Receivers' => ['Persons', 'Institutions'],],
